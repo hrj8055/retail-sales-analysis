@@ -1,0 +1,177 @@
+Loaded 10,717 rows into table 'orders' (shopkart.db)
+
+==========================================================================================
+Q1. Overall KPIs: orders, customers, revenue, profit, margin, AOV
+------------------------------------------------------------------------------------------
+ total_orders  total_customers  revenue_lakh  profit_lakh  profit_margin_pct  avg_order_value
+        10717             2739        629.42        75.56              12.01           6641.0
+
+==========================================================================================
+Q2. Year-over-year growth in revenue and profit
+------------------------------------------------------------------------------------------
+ year  revenue_lakh  profit_lakh  revenue_growth_pct
+ 2024        284.57        34.31                 NaN
+ 2025        344.85        41.26                21.2
+
+==========================================================================================
+Q3. Monthly revenue trend with month-over-month growth (window function)
+------------------------------------------------------------------------------------------
+year_month  revenue_lakh  mom_growth_pct
+   2024-01         11.89             NaN
+   2024-02         14.58            22.6
+   2024-03         22.93            57.3
+   2024-04         19.64           -14.4
+   2024-05         17.12           -12.8
+   2024-06         18.67             9.0
+   2024-07         22.00            17.9
+   2024-08         25.85            17.5
+   2024-09         25.57            -1.1
+   2024-10         42.16            64.9
+   2024-11         36.14           -14.3
+   2024-12         28.02           -22.5
+   2025-01         17.64           -37.0
+   2025-02         22.54            27.8
+   2025-03         24.45             8.5
+   2025-04         22.98            -6.0
+   2025-05         21.63            -5.9
+   2025-06         25.45            17.7
+   2025-07         25.73             1.1
+   2025-08         24.73            -3.9
+   2025-09         29.07            17.5
+   2025-10         55.11            89.6
+   2025-11         43.66           -20.8
+   2025-12         31.84           -27.1
+
+==========================================================================================
+Q4. Category performance: revenue share vs profit share
+------------------------------------------------------------------------------------------
+      category  revenue_lakh  revenue_share_pct  profit_lakh  profit_share_pct  margin_pct
+   Electronics        405.37               64.4         3.94               5.2         1.0
+       Fashion         70.18               11.1        29.91              39.6        42.6
+     Furniture         58.01                9.2        12.38              16.4        21.3
+Home & Kitchen         48.40                7.7        11.63              15.4        24.0
+        Sports         33.69                5.4        10.50              13.9        31.2
+        Beauty         13.77                2.2         7.20               9.5        52.3
+
+==========================================================================================
+Q5. Top 10 products by profit
+------------------------------------------------------------------------------------------
+              product_name    category  units_sold  revenue_lakh  profit_lakh
+                Silk Saree     Fashion         656         18.81         7.18
+             Running Shoes     Fashion         820         15.00         6.26
+           Casual Sneakers     Fashion         847         11.70         5.16
+             3-Seater Sofa   Furniture         123         23.55         4.47
+            Slim Fit Jeans     Fashion         987          9.41         4.36
+         Women's Kurta Set     Fashion         893          9.90         4.33
+English Willow Cricket Bat      Sports         330         12.63         3.90
+        Noise ColorFit Pro Electronics         780         18.62         3.48
+      Adjustable Dumbbells      Sports         357         11.92         3.32
+       Eau de Parfum 100ml      Beauty         378          6.25         3.07
+
+==========================================================================================
+Q6. Products that LOSE money overall
+------------------------------------------------------------------------------------------
+         product_name    category  revenue_lakh  profit_lakh
+            iPhone 15 Electronics         92.03        -2.96
+       HP Pavilion 15 Electronics         81.33        -1.66
+Lenovo IdeaPad Slim 3 Electronics         70.92        -0.31
+
+==========================================================================================
+Q7. Impact of discount level on profitability
+------------------------------------------------------------------------------------------
+discount_band  orders  revenue_lakh  profit_lakh  margin_pct
+  No discount    2759        180.00        40.81        22.7
+        1-10%    4234        251.00        39.36        15.7
+       11-20%    2806        156.29         9.83         6.3
+       21-30%     186          9.02        -1.18       -13.0
+         >30%     732         33.11       -13.26       -40.0
+
+==========================================================================================
+Q8. Regional revenue, 2024 vs 2025 (conditional aggregation)
+------------------------------------------------------------------------------------------
+region  rev_2024_lakh  rev_2025_lakh  growth_pct
+ South          96.10         125.38        30.5
+  West          74.34          88.08        18.5
+ North          74.63          86.06        15.3
+  East          39.50          45.32        14.7
+
+==========================================================================================
+Q9. Top 3 cities in each region by revenue (RANK window function)
+------------------------------------------------------------------------------------------
+region        city  revenue_lakh  rnk
+  East     Kolkata         41.95    1
+  East       Patna         17.56    2
+  East Bhubaneswar         15.37    3
+ North       Delhi         92.92    1
+ North     Lucknow         29.79    2
+ North      Jaipur         23.83    3
+ South   Bangalore         87.35    1
+ South   Hyderabad         59.42    2
+ South     Chennai         53.30    3
+  West      Mumbai        101.71    1
+  West        Pune         32.54    2
+  West   Ahmedabad         28.18    3
+
+==========================================================================================
+Q10. Return and cancellation rate by category
+------------------------------------------------------------------------------------------
+      category  orders  return_rate_pct  cancel_rate_pct
+       Fashion    3285             13.5              4.7
+     Furniture     738              9.1              3.0
+Home & Kitchen    1852              5.2              2.6
+   Electronics    2359              4.8              4.4
+        Sports    1071              4.4              3.4
+        Beauty    1412              2.9              4.6
+
+==========================================================================================
+Q11. Cancellation rate by payment method (is COD a problem?)
+------------------------------------------------------------------------------------------
+  payment_method  orders  share_pct  cancel_rate_pct
+Cash on Delivery    1914       17.9             11.4
+     Net Banking     512        4.8              3.5
+     Credit Card    1982       18.5              2.5
+          Wallet     548        5.1              2.4
+             UPI    4469       41.7              2.3
+      Debit Card    1292       12.1              2.2
+
+==========================================================================================
+Q12. Delivery speed vs customer rating and returns
+------------------------------------------------------------------------------------------
+delivery_bucket  orders  avg_rating  return_rate_pct
+       1-3 days    3634        4.32              7.3
+       4-5 days    4028        4.30              7.6
+       6-7 days    2109        4.09              7.6
+        8+ days     516        3.80             14.9
+
+==========================================================================================
+Q13. Customer concentration: what share of revenue comes from the top 20% of customers?
+------------------------------------------------------------------------------------------
+ quintile  customers  revenue_lakh  revenue_share_pct
+        1        533        439.42               69.8
+        2        533        111.37               17.7
+        3        532         49.09                7.8
+        4        532         22.50                3.6
+        5        532          7.04                1.1
+
+==========================================================================================
+Q14. New vs repeat customers per year (first purchase via subquery)
+------------------------------------------------------------------------------------------
+ year  new_customers  returning_customers
+ 2024           2025                  992
+ 2025            714                 1820
+
+==========================================================================================
+Q15. Revenue by age group and gender
+------------------------------------------------------------------------------------------
+age_group gender  customers  revenue_lakh
+    18-24 Female        244         62.54
+    18-24   Male        310         62.92
+    25-34 Female        583        134.17
+    25-34   Male        667        147.80
+    35-44 Female        341         66.76
+    35-44   Male        420        117.17
+    45-54 Female         52         14.80
+    45-54   Male         71         19.13
+      55+ Female          4          0.98
+      55+   Male          4          0.65
+

@@ -1,0 +1,10 @@
+Raw rows: 10,892
+[1] Removed 160 exact duplicate rows
+[2] Parsed dates; unparseable left: 0
+[3] Standardised city names -> 15 cities; payment methods -> ['Cash on Delivery', 'Credit Card', 'Debit Card', 'Net Banking', 'UPI', 'Wallet']
+[4] Removed currency symbols/commas and converted numeric columns
+[5] Filled 107 missing regions using state -> region lookup
+[6a] Dropped 15 rows with quantity <= 0 (data-entry errors)
+[6b] Set 12 impossible ages to null, then filled age/gender from the same customer's other orders; ages still missing: 27
+[7] Added gross_sales, discount_amount, net_sales, total_cost, profit, revenue, realised_profit, date parts, age_group, discount_band
+Clean rows: 10,717  ->  data/processed/shopkart_sales_clean.csv
